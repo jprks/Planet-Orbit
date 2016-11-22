@@ -3,14 +3,24 @@ function varagout = orbit(planet)
 % Date: August 2nd, 2016
 % Purpose: Calculate the velocity required for orbit around Mars at varying
 % altitudes
+% Planet #
+% 1 - Mercury
+% 2 - Venus
+% 3 - Earth
+% 4 - Mars
+% 5 - Jupiter
+% 6 - Saturn
+% 7 - Uranus
+% 8 - Neptune
+% 9 - Pluto
 
 %% Constants
 G = 6.67*10^(-11); %kgm^2/s^2
     
 %% Astronomical Data Excel File
 data = xlsread('Astronomical_Data.xlsx');
-Mass = data(:,3)
-Radius = data(:,4)
+MassData = data(:,3);
+RadiusData = data(:,4);
 
 if planet == 1
     PlanetName = 'Mercury';
@@ -50,16 +60,16 @@ else
     end
 end
 %% Planet Conditions
-M = data(planet,3);
-R = data(planet,4);
+Planet_Mass = MassData(planet,1);
+Planet_Radius = RadiusData(planet,1);
 
 %% Calculations
 Orbit = (1);
 OrbitalPeriod = (1);
 rowinc = 1;
 
-for height = 5000:10:100000
-   Velocity = sqrt((G*M)/(R+height));
+for height = 5000:10:100000 % adjust to your liking, remember the mathematically the velocity and period cannot go to 0
+   Velocity = sqrt((G*Planet_Mass)/(Planet_Radius+height));
    Orbit(rowinc,1) = Velocity;
    Orbit(rowinc,2) = height;
    rowinc = rowinc + 1;
@@ -70,7 +80,7 @@ datainc = 1;
 
 for rad = 1:1:9501
     r2 = Orbit(datainc,2);
-    T = [(4*pi()^2)/(G*M)]*(R+r2)^3;
+    T = [(4*pi()^2)/(G*Planet_Mass)]*(Planet_Radius+r2)^3;
     OrbitalPeriod(rowinc,1) = T;
     OrbitalPeriod(rowinc,2) = r2;
     rowinc = rowinc + 1;
