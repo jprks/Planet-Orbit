@@ -22,42 +22,25 @@ data = xlsread('Astronomical_Data.xlsx');
 MassData = data(:,3);
 RadiusData = data(:,4);
 
-if planet == 1
-    PlanetName = 'Mercury';
-else
-    if planet == 2
+switch planet
+    case 1
+        PlanetName = 'Mercury';
+    case 2
         PlanetName = 'Venus';
-    else
-        if planet == 3
-            PlanetName = 'Earth';
-        else
-            if planet == 4
-                PlanetName = 'Mars';
-            else
-                if planet == 5
-                    PlanetName = 'Jupiter';
-                else
-                    if planet == 6
-                        PlanetName = 'Saturn';
-                    else
-                        if planet == 7
-                            PlanetName = 'Uranus';
-                        else
-                            if planet == 8
-                                PlanetName = 'Neptune';
-                            else
-                                if planet == 9
-                                    PlanetName = 'Pluto';
-                                else
-                                    display('Invalid planet number')
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
-    end
+    case 3
+        PlanetName = 'Earth';
+    case 4 
+        PlanetName = 'Mars';
+    case 5
+        PlanetName = 'Jupiter';
+    case 6
+        PlanetName = 'Saturn';
+    case 7
+        PlanetName = 'Uranus';
+    case 8
+        PlanetName = 'Neptune';
+    case 9
+        PlanetName = 'Pluto';
 end
 %% Planet Conditions
 Planet_Mass = MassData(planet,1);
